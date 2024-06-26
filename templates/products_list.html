@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #77d5d4 3px solid;
+        }
+        header a {
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+        header ul {
+            padding: 0;
+            list-style: none;
+        }
+        header li {
+            float: left;
+            display: inline;
+            padding: 0 20px 0 20px;
+        }
+        header #branding {
+            float: left;
+        }
+        header #branding h1 {
+            margin: 0;
+        }
+        header nav {
+            float: right;
+            margin-top: 10px;
+        }
+        .button_1 {
+            height: 38px;
+            background: #e8491d;
+            border: none;
+            padding-left: 20px;
+            padding-right: 20px;
+            color: #fff;
+        }
+        .product {
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #fff;
+        }
+        .product img {
+            max-width: 100%;
+        }
+        .product h3 {
+            margin-top: 0;
+        }
+        .product a {
+            text-decoration: none;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1>Welcome to our E-commerce Site</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li>Hello, {{ current_user.username }}</li>
+                    <li><a href="/logout">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <form method="GET" action="/">
+            <input type="text" name="query" placeholder="Search products">
+            <button type="submit" class="button_1">Search</button>
+        </form>
+
+        <h2>Products</h2>
+        <ul>
+            {% for product in products %}
+                <li class="product">
+                    <img src="{{ product.image_url }}" alt="{{ product.name }}">
+                    <h3><a href="{{ url_for('product_detail', product_id=product.id) }}">{{ product.name }}</a></h3>
+                    <p>{{ product.description }}</p>
+                    <p>Category: {{ product.category }}</p>
+                    <p>Price: ${{ product.price }}</p>
+                    <a href="{{ url_for('product_recommendations', product_id=product.id) }}">See Recommendations</a>
+
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laptop Recommendations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .back-link {
+            display: block;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .back-link a {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+        li {
+            background: #fff;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h3 {
+            margin: 0;
+            color: #333;
+        }
+        p {
+            margin: 5px 0;
+            color: #555;
+        }
+        img {
+            display: block;
+            margin: 10px 0;
+            max-width: 100%;
+            height: auto;
+        }
+        @media (min-width: 600px) {
+            img {
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Recommendations for {{ product.name }}</h1>
+        <div class="back-link">
+            <a href="/">Back to Products</a>
+        </div>
+        <ul>
+            {% for recommendation in recommendations %}
+                <li>
+                    <h3>{{ recommendation.name }}</h3>
+                    <p>{{ recommendation.description }}</p>
+                    <p>Category: {{ recommendation.category }}</p>
+                    <p>Price: Rs.{{ recommendation.price }}</p>
+                    <a href="{{ recommendation.flipkart_url }}" target="_blank">View on Flipkart</a>
+                    <img src="{{ recommendation.image_url }}" alt="{{ recommendation.name }}">
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

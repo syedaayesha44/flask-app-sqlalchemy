@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #b7b2b1, #afadab);
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .header h1 {
+            margin: 0;
+            color: #333;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+        .user-info p {
+            margin: 0;
+            margin-right: 10px;
+            color: #666;
+        }
+        .user-info a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        .search-form {
+            margin-bottom: 20px;
+        }
+        .search-form input[type="text"] {
+            width: calc(100% - 100px);
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .search-form button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .search-form button:hover {
+            background-color: #0056b3;
+        }
+        .products-list {
+            list-style: none;
+            padding: 0;
+        }
+        .product-item {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+        .product-item h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .product-item p {
+            margin: 0;
+            margin-bottom: 5px;
+            color: #666;
+        }
+        .product-item a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        .visual-search-btn {
+            display: block;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-align: center;
+            margin: 20px auto;
+        }
+        .visual-search-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Welcome to our E-commerce Site</h1>
+            <div class="user-info">
+                <p>Hello, {{ current_user.username }}</p>
+                <a href="/logout">Logout</a>
+            </div>
+        </div>
+
+        <a href="/visual_search" class="visual-search-btn">Visual Search</a>
+
+        <div class="search-form">
+            <form method="GET" action="/">
+                <input type="text" name="query" placeholder="Search products">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+
+        <h2>Products</h2>
+        <ul class="products-list">
+            {% for product in products %}
+                <li class="product-item">
+                    <h3>{{ product.name }}</h3>
+                    <p>{{ product.description }}</p>
+                    <p>Category: {{ product.category }}</p>
+                    <p>Price: Rs.{{ product.price }}</p>
+                    <a href="/recommendations/{{ product.id }}">See Recommendations</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ product.name }}</title>
+</head>
+<body>
+    <h1>{{ product.name }}</h1>
+    <p>{{ product.description }}</p>
+    <p>Category: {{ product.category }}</p>
+    <p>Price: ${{ product.price }}</p>
+    <p><a href="{{ product.flipkart_url }}" target="_blank">View on Flipkart</a></p>
+    <img src="{{ product.image_url }}" alt="{{ product.name }}" style="width:100px;height:auto;">
+    
+    <h2>Reviews</h2>
+    <ul>
+        {% for review in reviews %}
+            <li>
+                <strong>{{ review.user.username }}:</strong> {{ review.comment }} (Rating: {{ review.rating }})
+            </li>
+        {% endfor %}
+    </ul>
+
+    {% if current_user.is_authenticated %}
+        <h3>Add a Review</h3>
+        <form method="POST">
+            <label for="rating">Rating:</label>
+            <input type="number" id="rating" name="rating" min="1" max="5" required><br>
+            <label for="comment">Comment:</label>
+            <textarea id="comment" name="comment" required></textarea><br>
+            <button type="submit">Submit Review</button>
+        </form>
+    {% else %}
+        <p><a href="/login">Log in</a> to add a review.</p>
+    {% endif %}
+</body>
+</html>

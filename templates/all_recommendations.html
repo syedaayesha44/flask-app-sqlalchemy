@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Product Recommendations</title>
+</head>
+<body>
+    <h1>All Product Recommendations</h1>
+    <a href="/">Back to Products</a>
+
+    {% for product_id, recommendations in all_recommendations.items() %}
+        <h2>Recommendations for Product ID: {{ product_id }}</h2>
+        <ul>
+            {% for recommendation in recommendations %}
+                <li>
+                    <h3>{{ recommendation.name }}</h3>
+                    <p>{{ recommendation.description }}</p>
+                    <p>Category: {{ recommendation.category }}</p>
+                    <p>Price: ${{ recommendation.price }}</p>
+                    <a href="{{ recommendation.flipkart_url }}" target="_blank">View on Flipkart</a>
+                    <img src="{{ recommendation.image_url }}" alt="{{ recommendation.name }}" style="width:100px;height:auto;">
+                    <!-- Add other recommendation details as needed -->
+                </li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+</body>
+</html>

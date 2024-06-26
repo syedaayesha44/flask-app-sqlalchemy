@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Recommendations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        a {
+            text-decoration: none;
+            color: #3498db;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            background: #fff;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        li h3 {
+            margin: 0 0 10px;
+            flex: 1 1 100%;
+        }
+        li p {
+            margin: 5px 0;
+            flex: 1 1 100%;
+        }
+        li img {
+            max-width: 100px;
+            height: auto;
+            margin-left: auto;
+        }
+        @media (max-width: 600px) {
+            li {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            li img {
+                margin: 10px 0 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Book Recommendations for {{ product.name }}</h1>
+    <a href="/">Back to Products</a>
+    <ul>
+        {% for recommendation in recommendations %}
+            <li>
+                <h3>{{ recommendation.name }}</h3>
+                <p>{{ recommendation.description }}</p>
+                <p>Category: {{ recommendation.category }}</p>
+                <p>Price: Rs.{{ recommendation.price }}</p>
+                <a href="{{ recommendation.flipkart_url }}" target="_blank">View on Flipkart</a>
+                <img src="{{ recommendation.image_url }}" alt="{{ recommendation.name }}">
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

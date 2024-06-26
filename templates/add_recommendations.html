@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Recommendations</title>
+</head>
+<body>
+    <h1>Add Recommendations for {{ product.name }}</h1>
+    <a href="/">Back to Products</a>
+
+    <form action="/add_recommendations/{{ product.id }}" method="post">
+        <div>
+            <label for="name">Recommended Product Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+            <label for="category">Category:</label>
+            <input type="text" id="category" name="category" value="{{ product.category }}" required>
+        </div>
+        <div>
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price" required>
+        </div>
+        <div>
+            <label for="flipkart_url">Flipkart URL:</label>
+            <input type="url" id="flipkart_url" name="flipkart_url" required>
+        </div>
+        <div>
+            <label for="image_url">Image URL:</label>
+            <input type="url" id="image_url" name="image_url" required>
+        </div>
+        <button type="submit">Add Recommendation</button>
+    </form>
+
+    <h2>Existing Recommendations</h2>
+    <ul>
+        {% for recommendation in recommendations %}
+            <li>
+                <h3>{{ recommendation.recommended_product_name }}</h3>
+                <p>Category: {{ recommendation.category }}</p>
+                <p>Price: {{ recommendation.price }}</p>
+                <p><a href="{{ recommendation.flipkart_url }}" target="_blank">View on Flipkart</a></p>
+                <img src="{{ recommendation.image_url }}" alt="{{ recommendation.recommended_product_name }}" width="100">
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
